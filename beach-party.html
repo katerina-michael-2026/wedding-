@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Josefin+Sans:wght@300&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -105,11 +105,12 @@
     background: linear-gradient(to right, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
   }
 
-  /* ── ILLUSTRATION (waves + island) ── */
+  /* ── ILLUSTRATION (waves + island) — sits behind event block ── */
   .illustration-wrap {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
+    position: absolute;
+    left: 0; right: 0;
+    pointer-events: none;
+    z-index: 0;
   }
   #illustration-svg {
     display: block;
@@ -298,12 +299,12 @@
   <!-- First gold line = anchor for waves -->
   <span class="gold-line" id="anchor-line"></span>
 
-  <!-- Illustration: waves + island, rendered between the two gold lines -->
+  <!-- Illustration sits absolutely behind the event block -->
   <div class="illustration-wrap" id="illustration-wrap">
     <svg id="illustration-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"></svg>
   </div>
 
-  <!-- Event block -->
+  <!-- Event block — overlays the illustration -->
   <div class="event-block">
     <div class="event-name">Beach Party</div>
     <div class="event-sub">Paralyia Beach Bar</div>
@@ -365,8 +366,8 @@
 <!-- KLEINDRUCK -->
 <div class="section" style="text-align:center; padding-top:8px; padding-bottom:8px;">
   <div class="kleindruck">
-    Weitere Getränke auf eigene Rechnung · Additional drinks at own expense<br>
-    Επιπλέον ποτά με ιδία χρέωση
+    Weitere Getränke und Essen auf eigene Rechnung · Additional drinks and food at own expense<br>
+    Επιπλέον ποτά και φαγητό με ιδία χρέωση
   </div>
 </div>
 
@@ -382,14 +383,6 @@
   </div>
 </div>
 
-<span class="gold-line-section"></span>
-
-<!-- QR CODE -->
-<div class="qr-section">
-  <div id="qr-code"></div>
-  <div class="kleindruck" style="letter-spacing:0.12em;">Beach Party</div>
-</div>
-
 <!-- BOTTOM CORNERS -->
 <div class="bottom-corners">
   <div class="corner-bl-abs"></div>
@@ -397,25 +390,29 @@
 </div>
 
 <script>
-new QRCode(document.getElementById('qr-code'), {
-  text: 'https://katerina-michael-2026.github.io/wedding-/beach-party.html',
-  width: 54,
-  height: 54,
-  colorDark: '#1A3A5C',
-  colorLight: '#F9F7F4',
-  correctLevel: QRCode.CorrectLevel.M
-});
-
 document.fonts.ready.then(() => requestAnimationFrame(() => requestAnimationFrame(() => {
+  const heroWrap = document.querySelector('.hero-wrap');
+  const anchorLine = document.getElementById('anchor-line');
+  const secondGoldLine = anchorLine.nextElementSibling.nextElementSibling.nextElementSibling; // illustration-wrap, event-block, second gold-line
   const wrap = document.getElementById('illustration-wrap');
   const svg = document.getElementById('illustration-svg');
 
-  // Width of the container (full width of hero-wrap inside 14px padding each side)
+  const heroRect = heroWrap.getBoundingClientRect();
+  const anchorRect = anchorLine.getBoundingClientRect();
+  const secondLineRect = secondGoldLine.getBoundingClientRect();
+
+  // SVG spans from just below anchor line to just below second gold line
+  const svgTop = anchorRect.bottom - heroRect.top;
+  const svgBottom = secondLineRect.bottom - heroRect.top;
+  const svgH = svgBottom - svgTop;
   const svgW = wrap.offsetWidth;
-  const svgH = 86; // same height as card version
+
+  wrap.style.top = svgTop + 'px';
+  wrap.style.height = svgH + 'px';
 
   svg.setAttribute('viewBox', `0 0 ${svgW} ${svgH}`);
-  svg.style.height = svgH + 'px';
+  svg.setAttribute('width', svgW);
+  svg.setAttribute('height', svgH);
 
   const teal = '#5DCAA5';
   const sand = '#F5E6A3';
