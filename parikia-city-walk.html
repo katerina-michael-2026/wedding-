@@ -7,6 +7,7 @@
 <title>Parikia City Walk · K & M</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -31,292 +32,184 @@
     margin: 0 auto;
   }
 
-  /* ACCENT TOP BAR */
-  .accent-bar {
-    height: 4px;
-    background: var(--teal);
-    width: 100%;
-  }
+  /* ── LANGUAGE SYSTEM ── 
+     Uses data-lang attribute on body — never a class.
+     .L-de / .L-en / .L-gr are hidden by default.
+     body[data-lang=de] .L-de { display: block } shows correct language.
+     body never matches .L-de because body has no such class. */
+  .L-de, .L-en, .L-gr { display: none !important; }
+  body[data-lang=de] .L-de { display: block !important; }
+  body[data-lang=en] .L-en { display: block !important; }
+  body[data-lang=gr] .L-gr { display: block !important; }
 
-  /* HERO */
-  .hero {
-    padding: 36px 28px 28px;
-    text-align: center;
-    position: relative;
-    border-bottom: 0.5px solid rgba(184,151,90,0.25);
-  }
+  /* Inline variants */
+  body[data-lang=de] .L-de.inline { display: inline !important; }
+  body[data-lang=en] .L-en.inline { display: inline !important; }
+  body[data-lang=gr] .L-gr.inline { display: inline !important; }
 
-  .monogram {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    font-weight: 300;
-    letter-spacing: 0.2em;
-    color: var(--gold);
-  }
-  .monogram .amp { font-style: italic; }
+  /* ── TOP BAR ── */
+  .accent-bar { height: 4px; background: var(--teal); width: 100%; }
 
-  .full-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--navy);
-    letter-spacing: 0.08em;
-    margin-top: 2px;
-  }
-
-  .date-mono {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 11px;
-    font-weight: 300;
-    letter-spacing: 0.2em;
-    color: var(--gold);
-    margin-top: 2px;
-  }
-
-  .gold-line {
-    width: 100%;
-    height: 0.5px;
-    background: linear-gradient(to right, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
-    opacity: 0.5;
-    margin: 18px 0;
-  }
-
-  .gold-line-short {
-    width: 48px;
-    height: 0.5px;
-    background: var(--gold);
-    opacity: 0.4;
-    margin: 12px auto;
-  }
-
-  .event-tag {
-    font-size: 8px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 6px;
-  }
-
-  .event-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 38px;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--navy);
-    line-height: 1.05;
-  }
-
-  .event-subtitle {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 300;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: var(--navy-light);
-    margin-top: 4px;
-  }
-
-  .hero-meta {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 18px;
-    flex-wrap: wrap;
-  }
-  .hero-meta-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-  }
-  .hero-meta-label {
-    font-size: 7px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .hero-meta-value {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--navy);
-  }
-
-  /* WINDMILL WATERMARK */
-  .windmill-wrap {
-    position: absolute;
-    bottom: 20px;
-    left: 16px;
-    opacity: 0.07;
-    pointer-events: none;
-  }
-
-  /* SECTIONS */
-  .section {
-    padding: 22px 28px;
-    border-bottom: 0.5px solid rgba(184,151,90,0.15);
-  }
-
-  .section-label {
-    font-size: 7.5px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 10px;
-    display: block;
-  }
-
-  .section-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    font-weight: 300;
-    color: var(--text);
-    line-height: 1.7;
-  }
-
-  .section-text.italic {
-    font-style: italic;
-    color: var(--muted);
-  }
-
-  /* INCLUDED LIST */
-  .included-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .included-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .included-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--teal);
-    flex-shrink: 0;
-    margin-top: 6px;
-  }
-  .included-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    font-weight: 300;
-    color: var(--text);
-    line-height: 1.5;
-  }
-  .included-sub {
-    font-size: 11px;
-    font-family: 'Josefin Sans', sans-serif;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    display: block;
-  }
-
-  .extra-note {
-    margin-top: 12px;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    color: var(--gold);
-    line-height: 1.7;
-  }
-
-  /* NOTES PILLS */
-  .note-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .pill {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: var(--navy);
-    border: 0.5px solid rgba(26,58,92,0.25);
-    border-radius: 40px;
-    padding: 5px 14px;
-  }
-
-  /* LANG SWITCHER */
+  /* ── LANG SWITCHER ── */
   .lang-switcher {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
+    display: flex; justify-content: center; gap: 6px;
     padding: 16px 28px 0;
   }
   .lang-btn {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    color: var(--navy-light);
-    border: 0.5px solid rgba(92,139,168,0.3);
-    border-radius: 40px;
-    padding: 4px 12px;
-    background: transparent;
-    cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif; font-size: 9px;
+    letter-spacing: 0.15em; color: var(--navy-light);
+    border: 0.5px solid rgba(92,139,168,0.3); border-radius: 40px;
+    padding: 4px 12px; background: transparent; cursor: pointer;
     transition: all 0.15s;
   }
-  .lang-btn.active {
-    background: var(--navy);
-    color: var(--cream);
-    border-color: var(--navy);
+  .lang-btn.active { background: var(--navy); color: var(--cream); border-color: var(--navy); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 36px 28px 28px; text-align: center;
+    position: relative; border-bottom: 0.5px solid rgba(184,151,90,0.25);
+  }
+  .windmill-wrap { position: absolute; bottom: 20px; left: 16px; opacity: 0.07; pointer-events: none; }
+  .monogram { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 300; letter-spacing: 0.2em; color: var(--gold); }
+  .monogram .amp { font-style: italic; }
+  .full-name { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 300; font-style: italic; color: var(--navy); letter-spacing: 0.08em; margin-top: 2px; }
+  .date-mono { font-family: 'Cormorant Garamond', serif; font-size: 11px; font-weight: 300; letter-spacing: 0.2em; color: var(--gold); margin-top: 2px; }
+  .gold-line { width: 100%; height: 0.5px; background: linear-gradient(to right, transparent, var(--gold) 20%, var(--gold) 80%, transparent); opacity: 0.5; margin: 18px 0; }
+  .gold-line-short { width: 48px; height: 0.5px; background: var(--gold); opacity: 0.4; margin: 12px auto; }
+  .event-title { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 300; font-style: italic; color: var(--navy); line-height: 1.05; }
+  .event-subtitle { font-family: 'Josefin Sans', sans-serif; font-size: 12px; font-weight: 300; letter-spacing: 0.26em; text-transform: uppercase; color: var(--navy-light); margin-top: 4px; }
+  .hero-meta { display: flex; justify-content: center; gap: 20px; margin-top: 18px; }
+  .hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .hero-meta-label { font-size: 7px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .hero-meta-value { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; color: var(--navy); }
+
+  /* ── SECTIONS ── */
+  .section { padding: 22px 28px; border-bottom: 0.5px solid rgba(184,151,90,0.15); }
+  .section-label { font-size: 7.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: block; text-align: center; }
+  .section-text { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; color: var(--text); line-height: 1.7; }
+
+  /* ── ROUTE TEAM COLS ── */
+  .route-cols { display: flex; gap: 0; align-items: stretch; margin-bottom: 16px; }
+  .route-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .route-col-left { padding-right: 14px; }
+  .route-col-right { padding-left: 14px; }
+  .route-divider { width: 0.5px; background: linear-gradient(to bottom, transparent, rgba(184,151,90,0.5) 20%, rgba(184,151,90,0.5) 80%, transparent); }
+  .route-team-label { font-size: 7px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); text-align: center; }
+  .route-link {
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+    font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 300;
+    color: var(--navy); text-decoration: none; text-align: center;
+    border: 0.5px solid rgba(184,151,90,0.35); border-radius: 6px;
+    padding: 8px 10px; background: rgba(26,58,92,0.03); width: 100%;
+    transition: background 0.15s;
+  }
+  .route-link:hover { background: rgba(26,58,92,0.07); }
+
+  /* ── MAP ── */
+  #map { height: 260px; border-radius: 8px; border: 0.5px solid rgba(184,151,90,0.2); }
+
+  /* ── TIMELINE STOPS ── */
+  .timeline { margin-top: 20px; position: relative; }
+
+  /* Central vertical line */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(184,151,90,0.35) 5%, rgba(184,151,90,0.35) 95%, transparent);
+    transform: translateX(-50%);
+    z-index: 0;
   }
 
-  /* MAP PLACEHOLDER */
-  .map-placeholder {
-    background: rgba(26,58,92,0.04);
-    border: 0.5px solid rgba(184,151,90,0.2);
+  /* Each stop row */
+  .tl-row { position: relative; display: flex; align-items: flex-start; margin-bottom: 6px; min-height: 20px; }
+
+  /* Groom: card on left, dot on right of card */
+  .tl-row.groom { justify-content: flex-start; }
+  .tl-row.groom .tl-card { margin-right: calc(50% + 16px); }
+
+  /* Bride: card on right, dot on left of card */
+  .tl-row.bride { justify-content: flex-end; }
+  .tl-row.bride .tl-card { margin-left: calc(50% + 16px); }
+
+  /* Both: full width centered card, line behind it */
+  .tl-row.both { justify-content: center; }
+  .tl-row.both .tl-card { width: 100%; margin: 0; }
+
+  /* Dot on the central line */
+  .tl-dot {
+    position: absolute;
+    left: 50%; top: 14px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    flex-shrink: 0;
+    z-index: 2;
+    border: 1.5px solid var(--cream);
+  }
+  .tl-row.groom .tl-dot { background: var(--navy); }
+  .tl-row.bride .tl-dot { background: var(--teal); }
+  .tl-row.both .tl-dot { background: var(--gold); width: 12px; height: 12px; top: 18px; }
+
+  /* Card */
+  .tl-card {
+    background: rgba(26,58,92,0.03);
+    border: 0.5px solid rgba(184,151,90,0.25);
     border-radius: 8px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    color: var(--navy-light);
+    overflow: hidden;
+    width: calc(50% - 20px);
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
   }
-  .map-placeholder svg { opacity: 0.3; }
-  .map-placeholder span {
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+  .tl-row.both .tl-card {
+    border-color: rgba(184,151,90,0.4);
+    background: var(--cream);
+    z-index: 2;
   }
 
-  /* FOOTER */
-  .footer {
-    padding: 28px;
-    text-align: center;
+  .tl-header { display: flex; align-items: center; gap: 8px; padding: 9px 11px; }
+  .tl-num {
+    width: 20px; height: 20px; border-radius: 50%;
+    font-family: 'Josefin Sans', sans-serif; font-size: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: var(--cream);
   }
-  .footer-mono {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    font-weight: 300;
-    letter-spacing: 0.15em;
-    color: var(--gold);
+  .tl-row.groom .tl-num { background: var(--navy); }
+  .tl-row.bride .tl-num { background: var(--teal); }
+  .tl-row.both .tl-num { background: var(--gold); }
+
+  .tl-name {
+    font-family: 'Cormorant Garamond', serif; font-size: 13px;
+    font-weight: 300; color: var(--navy); flex: 1; line-height: 1.2;
   }
+  .tl-row.both .tl-name { text-align: center; font-size: 14px; }
+
+  .tl-chevron { color: var(--gold); font-size: 9px; flex-shrink: 0; transition: transform 0.2s; }
+  .tl-card.open .tl-chevron { transform: rotate(180deg); }
+
+  .tl-body { display: none; padding: 0 11px 10px 11px; border-top: 0.5px solid rgba(184,151,90,0.15); }
+  .tl-card.open .tl-body { display: block; }
+
+  .tl-desc { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.6; padding-top: 8px; }
+  .tl-meta { margin-top: 5px; font-size: 7.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+
+  /* Spacer between timeline sections */
+  .tl-spacer { height: 6px; }
+
+  /* ── NOTES PILLS ── */
+  .note-pills { display: flex; flex-wrap: wrap; column-gap: 8px; row-gap: 28px; justify-content: center; }
+  .pill { font-family: 'Josefin Sans', sans-serif; font-size: 10px; letter-spacing: 0.1em; color: var(--navy); border: 0.5px solid rgba(26,58,92,0.25); border-radius: 40px; padding: 5px 14px; }
+
+  /* ── FOOTER ── */
+  .footer { padding: 28px; text-align: center; }
+  .footer-mono { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; letter-spacing: 0.15em; color: var(--gold); }
   .footer-mono .amp { font-style: italic; }
-  .footer-date {
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: var(--navy-light);
-    margin-top: 4px;
-  }
-  .footer-bottom {
-    margin-top: 16px;
-    font-size: 8.5px;
-    letter-spacing: 0.1em;
-    color: rgba(92,139,168,0.5);
-  }
-
-  /* LANGUAGE CONTENT */
-  .lang-content { display: none; }
-  .lang-content.active { display: block; }
+  .footer-bottom { margin-top: 16px; font-size: 8.5px; letter-spacing: 0.1em; color: rgba(92,139,168,0.5); }
 </style>
 </head>
-<body>
+<body data-lang="de">
 
 <div class="accent-bar"></div>
 
@@ -347,114 +240,273 @@
   </div>
 
   <div class="monogram">K <span class="amp">&</span> M</div>
-  <div class="full-name">Katerina & Michael</div>
+  <div class="full-name">Katerina &amp; Michael</div>
   <div class="date-mono">02 · VI · 2026</div>
-
   <div class="gold-line"></div>
-
-  <div class="event-tag">Event · Paros, Griechenland</div>
   <div class="event-title">Parikia</div>
   <div class="event-subtitle">City Walk</div>
-
   <div class="hero-meta">
     <div class="hero-meta-item">
-      <span class="hero-meta-label">Datum</span>
-      <span class="hero-meta-value">Di, 02. Juni</span>
-    </div>
-    <div class="hero-meta-item">
-      <span class="hero-meta-label">Uhrzeit</span>
+      <span class="hero-meta-label L-de">Uhrzeit</span>
+      <span class="hero-meta-label L-en">Time</span>
+      <span class="hero-meta-label L-gr">Ώρα</span>
       <span class="hero-meta-value">18:30</span>
-    </div>
-    <div class="hero-meta-item">
-      <span class="hero-meta-label">Sonnenuntergang</span>
-      <span class="hero-meta-value">20:34</span>
     </div>
   </div>
 </div>
 
 <!-- PROGRAMM -->
 <div class="section">
-  <span class="section-label" id="label-programme">Programm</span>
-
-  <div class="lang-content active" id="de-programme">
-    <p class="section-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-  </div>
-  <div class="lang-content" id="en-programme">
-    <p class="section-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-  </div>
-  <div class="lang-content" id="gr-programme">
-    <p class="section-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-  </div>
+  <span class="section-label L-de">Programm</span>
+  <span class="section-label L-en">Programme</span>
+  <span class="section-label L-gr">Πρόγραμμα</span>
+  <p class="section-text L-de">Gemeinsam erkunden wir die Altstadt von Parikia — das Herz von Paros. In zwei Gruppen starten wir an unterschiedlichen Punkten und schlendern vorbei an byzantinischen Kirchen, venezianischen Burgruinen, Windmühlen und versteckten Gassen, bevor wir uns alle zum Sonnenuntergang am Alexandros Bar wiedertreffen.</p>
+  <p class="section-text L-en">Together we explore the old town of Parikia — the heart of Paros. Starting in two groups from different points, we stroll past Byzantine churches, Venetian castle ruins, windmills and hidden alleyways, before reuniting at sunset at Alexandros Bar.</p>
+  <p class="section-text L-gr">Μαζί εξερευνούμε την παλιά πόλη της Παροικίας — την καρδιά της Πάρου. Ξεκινώντας σε δύο ομάδες, περπατάμε δίπλα σε βυζαντινές εκκλησίες, βενετσιάνικα ερείπια, ανεμόμυλους και κρυμμένα στενά, για να συναντηθούμε όλοι στο ηλιοβασίλεμα στο Alexandros Bar.</p>
 </div>
 
 <!-- DAUER -->
 <div class="section">
-  <span class="section-label">Dauer · Duration · Διάρκεια</span>
-  <p class="section-text">Ca. 2 Stunden · Approx. 2 hours · Περίπου 2 ώρες</p>
+  <span class="section-label L-de">Dauer</span>
+  <span class="section-label L-en">Duration</span>
+  <span class="section-label L-gr">Διάρκεια</span>
+  <p class="section-text L-de" style="text-align:center">Ca. 2 Stunden</p>
+  <p class="section-text L-en" style="text-align:center">Approx. 2 hours</p>
+  <p class="section-text L-gr" style="text-align:center">Περίπου 2 ώρες</p>
 </div>
 
-<!-- KARTE / MAP -->
+<!-- ROUTE -->
 <div class="section">
-  <span class="section-label">Route · Map · Χάρτης</span>
-  <div class="map-placeholder">
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A3A5C" stroke-width="1.5">
-      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-      <circle cx="12" cy="9" r="2.5"/>
-    </svg>
-    <span>Route wird hier eingebettet</span>
+  <span class="section-label L-de">Route</span>
+  <span class="section-label L-en">Route</span>
+  <span class="section-label L-gr">Διαδρομή</span>
+
+  <div class="route-cols">
+    <div class="route-col route-col-left">
+      <span class="route-team-label">🤵 Team Groom</span>
+      <a class="route-link" href="https://www.google.com/maps/dir/37.0934793,25.1560142/37.0900000,25.1540000/37.0849664,25.1517979/37.0845792,25.1489148/37.0853000,25.1467000/37.0848000,25.1440000/37.0844504,25.1469752/37.0816581,25.1438571&travelmode=walking" target="_blank" rel="noopener">
+        📍 <span class="L-de">Route öffnen</span><span class="L-en">Open route</span><span class="L-gr">Άνοιγμα</span>
+      </a>
+    </div>
+    <div class="route-divider"></div>
+    <div class="route-col route-col-right">
+      <span class="route-team-label">👰 Team Bride</span>
+      <a class="route-link" href="https://www.google.com/maps/dir/37.0849664,25.1517979/37.0848000,25.1524000/37.0847000,25.1507000/37.0849354,25.1485065/37.084397,25.148781/37.0853000,25.1467000/37.0848000,25.1440000/37.0816581,25.1438571&travelmode=walking" target="_blank" rel="noopener">
+        📍 <span class="L-de">Route öffnen</span><span class="L-en">Open route</span><span class="L-gr">Άνοιγμα</span>
+      </a>
+    </div>
   </div>
-</div>
 
-<!-- INKLUDIERT -->
-<div class="section">
-  <span class="section-label">Inkludiert · Included · Περιλαμβάνεται</span>
-  <ul class="included-list">
-    <li>
-      <div class="included-dot"></div>
-      <div class="included-text">
-        Begrüßungsgetränk
-        <span class="included-sub">Welcome drink · Ποτό καλωσορίσματος</span>
-      </div>
-    </li>
-    <li>
-      <div class="included-dot"></div>
-      <div class="included-text">
-        Soft Drinks
-        <span class="included-sub">Αναψυκτικά · Lorem ipsum</span>
-      </div>
-    </li>
-  </ul>
-  <p class="extra-note">* Weitere Getränke werden separat berechnet.<br>Additional drinks are charged separately.<br>Επιπλέον ποτά χρεώνονται χωριστά.</p>
+  <div id="map"></div>
+  <div class="timeline" id="timeline"></div>
 </div>
 
 <!-- HINWEISE -->
 <div class="section">
-  <span class="section-label">Hinweise · Notes · Σημειώσεις</span>
-  <div class="note-pills">
-    <span class="pill">👟 Bequeme Schuhe</span>
-    <span class="pill">🕶 Sonnenbrille</span>
-    <span class="pill">☀️ Sonnencreme</span>
-    <span class="pill">💧 Wasser mitnehmen</span>
-    <span class="pill">📸 Kamera</span>
-  </div>
-  <p class="section-text italic" style="margin-top: 14px; font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam.</p>
+  <span class="section-label L-de">Hinweise</span>
+  <span class="section-label L-en">Notes</span>
+  <span class="section-label L-gr">Σημειώσεις</span>
+  <p class="section-text L-de" style="text-align:center; line-height:2;">
+    👟 Bequeme Schuhe · 🕶 Sonnenbrille · ☀️ Sonnencreme · 💧 Wasser mitnehmen · 📸 Kamera
+  </p>
+  <p class="section-text L-en" style="text-align:center; line-height:2;">
+    👟 Comfortable shoes · 🕶 Sunglasses · ☀️ Sunscreen · 💧 Bring water · 📸 Camera
+  </p>
+  <p class="section-text L-gr" style="text-align:center; line-height:2;">
+    👟 Άνετα παπούτσια · 🕶 Γυαλιά ηλίου · ☀️ Αντηλιακό · 💧 Νερό μαζί σας · 📸 Φωτογραφική
+  </p>
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
   <div class="gold-line-short"></div>
   <div class="footer-mono">K <span class="amp">&</span> M</div>
-  <div class="footer-date">Katerina & Michael · 05. Juni 2026 · Paros, Griechenland</div>
   <div class="footer-bottom">Parikia City Walk · 02.06.2026</div>
 </div>
 
 <script>
-  function setLang(lang) {
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-    document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll(`[id^="${lang}-"]`).forEach(el => el.classList.add('active'));
+// ── LANGUAGE ───────────────────────────────────────────────────────
+function setLang(lang) {
+  document.body.setAttribute('data-lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.lang-btn[onclick="setLang(\'' + lang + '\')"]').classList.add('active');
+  renderStops(lang);
+}
+
+// ── STOPS DATA ─────────────────────────────────────────────────────
+const stops = [
+  { team:'groom', lat:37.09348, lng:25.15601,
+    name:{de:'Omilos Beach Restaurant',en:'Omilos Beach Restaurant',gr:'Omilos Beach Restaurant'},
+    tag:{de:'Start · Team Groom',en:'Start · Team Groom',gr:'Εκκίνηση · Team Groom'},
+    desc:{de:'Startpunkt für Team Groom direkt am Strand nördlich von Parikia. Kykladische Atmosphäre, Meerblick — der perfekte Beginn.',en:'Starting point for Team Groom right on the beach north of Parikia. Cycladic atmosphere, sea views.',gr:'Σημείο εκκίνησης για το Team Groom δίπλα στην παραλία βόρεια της Παροικίας.'},
+    time:{de:'8 Min zum nächsten Stop',en:'8 min to next stop',gr:'8 λεπτά στην επόμενη στάση'}, n:1 },
+
+  { team:'bride', lat:37.08497, lng:25.15180,
+    name:{de:'Panagia Ekatontapyliani',en:'Panagia Ekatontapyliani',gr:'Παναγία Εκατονταπυλιανή'},
+    tag:{de:'Start · Team Bride',en:'Start · Team Bride',gr:'Εκκίνηση · Team Bride'},
+    desc:{de:'Startpunkt für Team Bride — eine der bedeutendsten frühchristlichen Kirchen Griechenlands (326 n. Chr.). Der Name bedeutet „Kirche mit 100 Türen" — 99 sind sichtbar, die hundertste öffnet sich, wenn Konstantinopel wieder griechisch wird.',en:'Start for Team Bride — one of Greece\'s most important early Christian churches (326 AD). The name means "Church of 100 Doors" — 99 are visible, the hundredth opens when Constantinople becomes Greek again.',gr:'Εκκίνηση για το Team Bride — μία από τις σημαντικότερες παλαιοχριστιανικές εκκλησίες της Ελλάδας (326 μ.Χ.). 99 πόρτες ορατές, η εκατοστή θα ανοίξει όταν η Κωνσταντινούπολη γίνει ξανά ελληνική.'},
+    time:{de:'4 Min zum nächsten Stop',en:'4 min to next stop',gr:'4 λεπτά στην επόμενη στάση'}, n:1 },
+
+  { team:'groom', lat:37.09000, lng:25.15400,
+    name:{de:'Antiker Friedhof',en:'Ancient Cemetery',gr:'Αρχαίο Νεκροταφείο'},
+    tag:{de:'Team Groom',en:'Team Groom',gr:'Team Groom'},
+    desc:{de:'Direkt am Uferweg nördlich des Hafens: eingezäunter Friedhof vom 8. Jh. v. Chr. bis 3. Jh. n. Chr. 1983 entdeckten Archäologen Gräber, Urnen und Marmorsarkophage.',en:'On the waterfront north of the harbour: cemetery in use from the 8th century BC to the 3rd century AD. Archaeologists discovered graves, urns and marble sarcophagi here in 1983.',gr:'Στο παραλιακό μονοπάτι βόρεια του λιμανιού: νεκροταφείο από τον 8ο αι. π.Χ. έως τον 3ο αι. μ.Χ.'},
+    time:{de:'6 Min zum nächsten Stop',en:'6 min to next stop',gr:'6 λεπτά στην επόμενη στάση'}, n:2 },
+
+  { team:'groom', lat:37.08497, lng:25.15180,
+    name:{de:'Panagia Ekatontapyliani',en:'Panagia Ekatontapyliani',gr:'Παναγία Εκατονταπυλιανή'},
+    tag:{de:'Team Groom',en:'Team Groom',gr:'Team Groom'},
+    desc:{de:'Eine der bedeutendsten frühchristlichen Kirchen Griechenlands (326 n. Chr.). Das älteste Taufbecken der Orthodoxie befindet sich im Inneren. Der Legende nach öffnet sich die 100. Tür, wenn Konstantinopel wieder griechisch wird.',en:'One of Greece\'s most significant early Christian churches (326 AD). The oldest baptismal font in Orthodoxy is inside. Legend: the 100th door opens when Constantinople becomes Greek again.',gr:'Μία από τις σημαντικότερες παλαιοχριστιανικές εκκλησίες (326 μ.Χ.). Η αρχαιότερη κολυμβήθρα της Ορθοδοξίας βρίσκεται εδώ.'},
+    time:{de:'5 Min zum nächsten Stop',en:'5 min to next stop',gr:'5 λεπτά στην επόμενη στάση'}, n:3 },
+
+  { team:'bride', lat:37.08480, lng:25.15240,
+    name:{de:'Archäologisches Museum',en:'Archaeological Museum',gr:'Αρχαιολογικό Μουσείο'},
+    tag:{de:'Team Bride',en:'Team Bride',gr:'Team Bride'},
+    desc:{de:'Direkt hinter der Panagia: eines der bedeutendsten Museen der Kykladen. Highlights: die prähistorische „Fette Dame" vom Eiland Saliagos und ein Fragment der Parischen Chronik — 1.318 Jahre griechischer Geschichte in 134 Versen auf Marmor. Eintritt 2 €.',en:'Behind the Panagia: one of the Cyclades\' most important museums. Highlights: the prehistoric "Fat Lady" from Saliagos and a fragment of the Parian Chronicle — 1,318 years of Greek history in 134 verses on marble. Entry €2.',gr:'Πίσω από την Παναγία: ένα από τα σημαντικότερα μουσεία των Κυκλάδων. Τμήμα του Παρίου Χρονικού — 1.318 χρόνια ελληνικής ιστορίας σε 134 στίχους. Είσοδος 2 €.'},
+    time:{de:'4 Min zum nächsten Stop',en:'4 min to next stop',gr:'4 λεπτά στην επόμενη στάση'}, n:2 },
+
+  { team:'bride', lat:37.08470, lng:25.15070,
+    name:{de:'Manto-Mavrogenous-Platz',en:'Manto Mavrogenous Square',gr:'Πλατεία Μαντώς Μαυρογένους'},
+    tag:{de:'Team Bride',en:'Team Bride',gr:'Team Bride'},
+    desc:{de:'Zentraler Platz von Parikia, benannt nach der Heldin des griechischen Unabhängigkeitskrieges. Manto Mavrogenous verkaufte ihren Schmuck für die Freiheit und starb 1848 verarmt auf Paros. Ihre Büste steht hier als stille Erinnerung.',en:'Central square of Parikia, named after the heroine of the Greek War of Independence. Manto Mavrogenous sold her jewellery for freedom and died destitute on Paros in 1848. Her bust stands here as a quiet memorial.',gr:'Κεντρική πλατεία της Παροικίας. Η Μαντώ Μαυρογένους πούλησε τα κοσμήματά της για την ελευθερία και πέθανε φτωχή στην Πάρο το 1848.'},
+    time:{de:'3 Min zum nächsten Stop',en:'3 min to next stop',gr:'3 λεπτά στην επόμενη στάση'}, n:3 },
+
+  { team:'groom', lat:37.08458, lng:25.14891,
+    name:{de:'Spiti House Bar',en:'Spiti House Bar',gr:'Spiti House Bar'},
+    tag:{de:'Team Groom',en:'Team Groom',gr:'Team Groom'},
+    desc:{de:'Mitten in der Fußgängerzone: eine der charaktervollsten Bars von Paros. „Spiti" heißt auf Griechisch „Haus" — und genau so fühlt es sich an. Seit 2004 ein Geheimtipp. Empfehlung: Greek Mule oder Greek Sage.',en:'In the heart of the pedestrian zone: one of Paros\'s most characterful bars. "Spiti" means "house" in Greek — and that\'s exactly how it feels. A local favourite since 2004.',gr:'Στο κέντρο του πεζόδρομου. «Spiti» σημαίνει «σπίτι» — και ακριβώς έτσι νιώθεις. Αγαπημένο από το 2004.'},
+    time:{de:'15 Min · dann 3 Min weiter',en:'15 min stay · then 3 min',gr:'15 λεπτά · μετά 3 λεπτά'}, n:4 },
+
+  { team:'bride', lat:37.08494, lng:25.14851,
+    name:{de:'YRIA Ceramics Design Store',en:'YRIA Ceramics Design Store',gr:'YRIA Ceramics Design Store'},
+    tag:{de:'Team Bride',en:'Team Bride',gr:'Team Bride'},
+    desc:{de:'Handgefertigte Keramik, die griechische Handwerkskunst mit zeitgenössischem Design verbindet. Nur wenige Schritte entfernt liegt das private Atelier (Yria Studio), wo die Stücke entstehen.',en:'Handcrafted ceramics combining traditional Greek craftsmanship with contemporary design. Just steps away is the private Yria Studio where the pieces are created.',gr:'Χειροποίητη κεραμική που συνδυάζει παραδοσιακή τεχνογνωσία με σύγχρονο σχεδιασμό.'},
+    time:{de:'2 Min zum nächsten Stop',en:'2 min to next stop',gr:'2 λεπτά στην επόμενη στάση'}, n:4 },
+
+  { team:'bride', lat:37.08440, lng:25.14878,
+    name:{de:'Yria Ceramics Studio',en:'Yria Ceramics Studio',gr:'Yria Ceramics Studio'},
+    tag:{de:'Team Bride',en:'Team Bride',gr:'Team Bride'},
+    desc:{de:'Das private Atelier — wo die Keramiken tatsächlich entstehen. Ein seltener Blick hinter die Kulissen griechischer Handwerkskunst, direkt in der Altstadt verborgen.',en:'The private atelier — where the ceramics actually come to life. A rare glimpse behind the scenes of Greek craftsmanship, hidden in the old town.',gr:'Το ιδιωτικό εργαστήριο όπου γεννιούνται τα κεραμικά, κρυμμένο στην παλιά πόλη.'},
+    time:{de:'5 Min zum nächsten Stop',en:'5 min to next stop',gr:'5 λεπτά στην επόμενη στάση'}, n:5 },
+
+  { team:'both', lat:37.08530, lng:25.14670,
+    name:{de:'Kastro · Venezianische Burg',en:'Kastro · Frankish Castle',gr:'Κάστρο · Φραγκοκάστελο'},
+    tag:{de:'Beide Teams',en:'Both Teams',gr:'Και οι δύο ομάδες'},
+    desc:{de:'Auf dem Hügel des Agios Konstantinos, auf den Resten der antiken Akropolis. Erbaut 1260 von Marco Sanudo mit Marmor antiker Tempel. Säulenreste des Demeter-Tempels (530 v. Chr.) noch erkennbar. Panoramablick über Parikia.',en:'On the hill of Agios Konstantinos, on the ancient acropolis. Built in 1260 by Marco Sanudo using marble from ancient temples. Columns from the Temple of Demeter (530 BC) still visible. Panoramic view over Parikia.',gr:'Στον λόφο του Αγίου Κωνσταντίνου. Κτισμένο το 1260 με μάρμαρο από αρχαίους ναούς. Κίονες του ναού της Δήμητρας (530 π.Χ.) ακόμα ορατοί. Πανόραμα Παροικίας.'},
+    time:{de:'5 Min zum nächsten Stop',en:'5 min to next stop',gr:'5 λεπτά στην επόμενη στάση'}, n:'5/6' },
+
+  { team:'both', lat:37.08480, lng:25.14400,
+    name:{de:'Windmühlen',en:'Windmills',gr:'Ανεμόμυλοι'},
+    tag:{de:'Beide Teams',en:'Both Teams',gr:'Και οι δύο ομάδες'},
+    desc:{de:'Das Wahrzeichen von Parikia — direkt am Hafen. Auf Paros gab es einst 55 Windmühlen, die den starken Ägäischen Wind nutzten. Heute vollständig restauriert. Perfekter Ort für den Sonnenuntergang um 20:34 Uhr.',en:'The landmark of Parikia — right at the harbour. Paros once had 55 windmills using the strong Aegean winds. Today fully restored. Perfect spot for the 20:34 sunset.',gr:'Το σύμβολο της Παροικίας ακριβώς στο λιμάνι. Η Πάρος είχε κάποτε 55 ανεμόμυλους. Τέλειο σημείο για το ηλιοβασίλεμα στις 20:34.'},
+    time:{de:'5–8 Min zum Endpunkt',en:'5–8 min to finish',gr:'5–8 λεπτά στο τέλος'}, n:'6/7' },
+
+  { team:'groom', lat:37.08445, lng:25.14698,
+    name:{de:'Evinos',en:'Evinos',gr:'Evinos'},
+    tag:{de:'Team Groom',en:'Team Groom',gr:'Team Groom'},
+    desc:{de:'Eine gemütliche Bar in den Gassen der Altstadt — entspannte Atmosphäre, griechische Drinks, lokales Flair. Der ideale vorletzte Stop vor dem Wiedersehen.',en:'A cosy bar in the old town alleyways — relaxed atmosphere, Greek drinks, local flair. The ideal penultimate stop before the reunion.',gr:'Άνετο μπαρ στα στενά της παλιάς πόλης — χαλαρή ατμόσφαιρα, ελληνικά ποτά.'},
+    time:{de:'5 Min zum Endpunkt',en:'5 min to finish',gr:'5 λεπτά στο τέλος'}, n:7 },
+
+  { team:'both', lat:37.08166, lng:25.14386,
+    name:{de:'Alexandros Bar',en:'Alexandros Bar',gr:'Alexandros Bar'},
+    tag:{de:'🏁 Endpunkt · Beide Teams',en:'🏁 Finish · Both Teams',gr:'🏁 Τέλος · Και οι δύο ομάδες'},
+    desc:{de:'Das Wiedersehen beider Teams — direkt am Hafen neben den Windmühlen. Cocktails, Sonnenuntergang und zwei Gruppen mit vielen Geschichten zu erzählen. Sonnenuntergang: 20:34.',en:'The reunion of both teams — at the harbour beside the windmills. Cocktails, sunset and two groups with stories to share. Sunset: 20:34.',gr:'Η επανένωση των ομάδων στο λιμάνι. Κοκτέιλ, ηλιοβασίλεμα και πολλές ιστορίες. Ηλιοβασίλεμα: 20:34.'},
+    time:null, n:'★' }
+];
+
+// ── RENDER TIMELINE ───────────────────────────────────────────────
+function renderStops(lang) {
+  const tl = document.getElementById('timeline');
+  // Remember open cards
+  const openSet = new Set();
+  tl.querySelectorAll('.tl-card.open').forEach(el => openSet.add(el.dataset.i));
+  tl.innerHTML = '';
+
+  stops.forEach((s, i) => {
+    const row = document.createElement('div');
+    row.className = 'tl-row ' + s.team;
+
+    const card = document.createElement('div');
+    card.className = 'tl-card' + (openSet.has(String(i)) ? ' open' : '');
+    card.dataset.i = i;
+    card.onclick = function() { this.classList.toggle('open'); };
+
+    const numClass = s.team === 'groom' ? 'groom' : s.team === 'bride' ? 'bride' : 'both';
+    card.innerHTML =
+      '<div class="tl-header">' +
+        '<div class="tl-num">' + s.n + '</div>' +
+        '<div class="tl-name">' + s.name[lang] + '</div>' +
+        '<span class="tl-chevron">▾</span>' +
+      '</div>' +
+      '<div class="tl-body">' +
+        '<p class="tl-desc">' + s.desc[lang] + '</p>' +
+        (s.time ? '<p class="tl-meta">' + s.time[lang] + '</p>' : '') +
+      '</div>';
+
+    if (s.team !== 'both') {
+      const dot = document.createElement('div');
+      dot.className = 'tl-dot';
+      row.appendChild(dot);
+    }
+    row.appendChild(card);
+    tl.appendChild(row);
+
+    // Small spacer between rows
+    const spacer = document.createElement('div');
+    spacer.className = 'tl-spacer';
+    tl.appendChild(spacer);
+  });
+}
+
+// ── LEAFLET MAP ────────────────────────────────────────────────────
+function initMap() {
+  const map = L.map('map', { scrollWheelZoom: false }).setView([37.0870, 25.1490], 15);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap', maxZoom: 19
+  }).addTo(map);
+
+  const groomLine = [[37.09348,25.15601],[37.09000,25.15400],[37.08497,25.15180],[37.08458,25.14891],[37.08530,25.14670],[37.08480,25.14400],[37.08445,25.14698],[37.08166,25.14386]];
+  const brideLine = [[37.08497,25.15180],[37.08480,25.15240],[37.08470,25.15070],[37.08494,25.14851],[37.08440,25.14878],[37.08530,25.14670],[37.08480,25.14400],[37.08166,25.14386]];
+
+  L.polyline(groomLine, {color:'#1A3A5C', weight:2.5, opacity:0.7, dashArray:'6,4'}).addTo(map);
+  L.polyline(brideLine, {color:'#5DCAA5', weight:2.5, opacity:0.7, dashArray:'6,4'}).addTo(map);
+
+  function icon(label, bg) {
+    return L.divIcon({
+      className: '',
+      html: '<div style="background:' + bg + ';color:#F9F7F4;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Josefin Sans,sans-serif;font-size:9px;box-shadow:0 1px 4px rgba(0,0,0,0.3);border:1.5px solid rgba(255,255,255,0.5)">' + label + '</div>',
+      iconSize: [22,22], iconAnchor: [11,11]
+    });
   }
+
+  [[37.09348,25.15601,'1','Omilos'],[37.09000,25.15400,'2','Friedhof'],[37.08497,25.15180,'3','Panagia'],[37.08458,25.14891,'4','Spiti Bar'],[37.08445,25.14698,'7','Evinos']]
+    .forEach(([lat,lng,n,name]) => L.marker([lat,lng],{icon:icon(n,'#1A3A5C')}).bindPopup('<b>🤵 '+name+'</b>').addTo(map));
+
+  [[37.08497,25.15180,'1','Panagia'],[37.08480,25.15240,'2','Museum'],[37.08470,25.15070,'3','Manto Platz'],[37.08494,25.14851,'4','YRIA Store'],[37.08440,25.14878,'5','Yria Studio']]
+    .forEach(([lat,lng,n,name]) => L.marker([lat,lng],{icon:icon(n,'#5DCAA5')}).bindPopup('<b>👰 '+name+'</b>').addTo(map));
+
+  [[37.08530,25.14670,'K','Kastro'],[37.08480,25.14400,'W','Windmühlen']]
+    .forEach(([lat,lng,n,name]) => L.marker([lat,lng],{icon:icon(n,'#5C8BA8')}).bindPopup('<b>🏛 '+name+'</b>').addTo(map));
+
+  L.marker([37.08166,25.14386],{icon:icon('★','#B8975A')}).bindPopup('<b>Alexandros Bar</b>').addTo(map);
+
+  const legend = L.control({position:'bottomright'});
+  legend.onAdd = () => {
+    const d = L.DomUtil.create('div');
+    d.style.cssText = 'background:#F9F7F4;padding:6px 10px;border-radius:6px;font-size:9px;letter-spacing:0.1em;color:#1A3A5C;border:0.5px solid rgba(184,151,90,0.3);font-family:Josefin Sans,sans-serif;line-height:1.8';
+    d.innerHTML = '<div>── 🤵 Team Groom</div><div>── 👰 Team Bride</div>';
+    return d;
+  };
+  legend.addTo(map);
+}
+
+// ── BOOT ──────────────────────────────────────────────────────────
+renderStops('de');
+
+const leafletJS = document.createElement('script');
+leafletJS.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+leafletJS.onload = initMap;
+document.head.appendChild(leafletJS);
 </script>
 </body>
 </html>
