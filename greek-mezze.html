@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F9F7F4">
+<title>Greek Mezze · K & M</title>
+
+<!-- Open Graph / WhatsApp Preview -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://katerina-michael-2026.github.io/wedding-/greek-mezze.html">
+<meta property="og:title" content="Greek Mezze · Katerina & Michael">
+<meta property="og:description" content="Mi, 03. Juni 2026 · 21:00 Uhr · Live Bouzouki, griechische Mezze und der beste Wein der Kykladen — im Koukoutsi, Paros.">
+<meta property="og:image" content="https://katerina-michael-2026.github.io/wedding-/preview-greek-mezze.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Greek Mezze · Katerina & Michael">
+<meta name="twitter:description" content="Mi, 03. Juni 2026 · 21:00 Uhr · Live Bouzouki & griechische Mezze im Koukoutsi.">
+<meta name="twitter:image" content="https://katerina-michael-2026.github.io/wedding-/preview-greek-mezze.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Josefin+Sans:wght@300&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #B8975A;
+    --navy: #1A3A5C;
+    --accent: #1B2D50;
+    --teal: #5DCAA5;
+    --navy-light: #5C8BA8;
+    --cream: #F9F7F4;
+    --text: #2A3A4A;
+    --muted: #5C7A8A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    min-height: 100vh;
+    max-width: 430px;
+    margin: 0 auto;
+  }
+
+  /* ── LANGUAGE SYSTEM ── */
+  .L-de, .L-en, .L-gr { display: none !important; }
+  body[data-lang=de] .L-de { display: block !important; }
+  body[data-lang=en] .L-en { display: block !important; }
+  body[data-lang=gr] .L-gr { display: block !important; }
+  body[data-lang=de] .L-de.inline { display: inline !important; }
+  body[data-lang=en] .L-en.inline { display: inline !important; }
+  body[data-lang=gr] .L-gr.inline { display: inline !important; }
+
+  /* ── ACCENT BAR ── */
+  .accent-bar { height: 3px; background: var(--accent); width: 100%; }
+
+  /* ── LANG SWITCHER ── */
+  .lang-switcher { display: flex; justify-content: center; gap: 6px; padding: 16px 28px 0; }
+  .lang-btn { font-family: 'Josefin Sans', sans-serif; font-size: 9px; letter-spacing: 0.15em; color: var(--navy-light); border: 0.5px solid rgba(92,139,168,0.3); border-radius: 40px; padding: 4px 12px; background: transparent; cursor: pointer; transition: all 0.15s; }
+  .lang-btn.active { background: var(--navy); color: var(--cream); border-color: var(--navy); }
+
+  /* ── HERO ── */
+  .hero-wrap { position: relative; padding: 0 14px; }
+  .corner { position: absolute; width: 20px; height: 20px; opacity: 0.65; z-index: 2; }
+  .corner-tl { top: 14px; left: 14px; border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+  .corner-tr { top: 14px; right: 14px; border-top: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+
+  .monogram-block { text-align: center; padding-top: 26px; padding-bottom: 10px; position: relative; z-index: 1; }
+  .monogram-compact { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 300; letter-spacing: 0.08em; color: var(--gold); }
+  .monogram-compact em { font-style: italic; }
+  .monogram-full { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 300; letter-spacing: 0.08em; color: var(--navy); margin-top: 2px; }
+  .monogram-date { font-family: 'Josefin Sans', sans-serif; font-size: 7.5px; font-weight: 300; letter-spacing: 0.22em; color: var(--gold); margin-top: 4px; text-transform: uppercase; }
+
+  .gold-line { display: block; width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--gold) 20%, var(--gold) 80%, transparent); position: relative; z-index: 1; }
+
+  .illustration-wrap { position: absolute; left: 0; right: 0; pointer-events: none; z-index: 0; }
+  #illustration-svg { display: block; width: 100%; opacity: 0.13; }
+
+  .event-block { text-align: center; padding: 10px 24px; position: relative; z-index: 1; }
+  .event-name { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; font-style: italic; color: var(--navy); line-height: 1.15; }
+  .event-sub { font-family: 'Josefin Sans', sans-serif; font-size: 13px; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--navy-light); margin-top: 4px; }
+
+  /* ── SECTIONS ── */
+  .section { padding: 14px 24px; }
+  .section-label { font-family: 'Josefin Sans', sans-serif; font-size: 7.5px; font-weight: 300; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; text-align: center; }
+  .content-text { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; color: var(--text); line-height: 1.7; text-align: center; }
+  .content-italic { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; font-style: italic; color: var(--muted); line-height: 1.7; text-align: center; }
+  .faint-line { display: block; width: calc(100% - 48px); margin: 0 24px; height: 1px; background: rgba(184,151,90,0.18); }
+  .kleindruck { font-family: 'Josefin Sans', sans-serif; font-size: 9px; font-weight: 300; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.7; }
+
+  /* ── INCLUDES DOT ── */
+  .includes-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); margin-right: 10px; vertical-align: middle; position: relative; top: -1px; flex-shrink: 0; }
+
+  /* ── MENU COLUMNS ── */
+  .menu-cols { display: flex; gap: 0; margin-top: 8px; }
+  .menu-col { flex: 1; }
+  .menu-col-left { padding-right: 16px; }
+  .menu-col-right { padding-left: 16px; }
+  .menu-divider { width: 0.5px; background: linear-gradient(to bottom, transparent, rgba(184,151,90,0.4) 20%, rgba(184,151,90,0.4) 80%, transparent); align-self: stretch; }
+  .menu-col-label { font-family: 'Josefin Sans', sans-serif; font-size: 7.5px; font-weight: 300; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; }
+  .included-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .included-list li { display: flex; align-items: flex-start; gap: 10px; }
+  .included-text { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; color: var(--text); line-height: 1.4; }
+
+  /* ── WINE ACCORDION ── */
+  .wine-list { display: flex; flex-direction: column; margin-top: 14px; }
+  .wine-item { border-bottom: 0.5px solid rgba(184,151,90,0.15); }
+  .wine-item:first-child { border-top: 0.5px solid rgba(184,151,90,0.15); }
+  .wine-header { display: flex; align-items: center; gap: 10px; padding: 10px 0; cursor: pointer; user-select: none; }
+  .wine-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; border: 0.5px solid rgba(184,151,90,0.4); }
+  .wine-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; color: var(--navy); flex: 1; }
+  .wine-chevron { color: var(--gold); font-size: 10px; flex-shrink: 0; transition: transform 0.2s; }
+  .wine-item.open .wine-chevron { transform: rotate(180deg); }
+  .wine-body { display: none; padding: 0 0 12px 20px; }
+  .wine-item.open .wine-body { display: block; }
+  .wine-producer { font-family: 'Josefin Sans', sans-serif; font-size: 8px; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .wine-desc { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; font-style: italic; color: var(--muted); line-height: 1.65; }
+
+  /* ── LOCATION LINK ── */
+  .location-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--navy); padding: 12px 14px; border: 0.5px solid rgba(184,151,90,0.3); border-radius: 8px; background: rgba(26,58,92,0.03); transition: background 0.15s; }
+  .location-link:hover { background: rgba(26,58,92,0.06); }
+  .location-pin { font-size: 18px; flex-shrink: 0; }
+  .location-text { display: flex; flex-direction: column; gap: 2px; }
+  .location-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300; color: var(--navy); }
+  .location-sub { font-family: 'Josefin Sans', sans-serif; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--navy-light); }
+  .location-arrow { margin-left: auto; color: var(--gold); font-size: 16px; opacity: 0.7; }
+
+  /* ── FOOTER ── */
+  .bottom-corners { position: relative; height: 28px; margin: 0 14px; }
+  .corner-bl-abs { position: absolute; bottom: 0; left: 0; width: 20px; height: 20px; border-bottom: 1px solid var(--gold); border-left: 1px solid var(--gold); opacity: 0.65; }
+  .corner-br-abs { position: absolute; bottom: 0; right: 0; width: 20px; height: 20px; border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); opacity: 0.65; }
+</style>
+</head>
+<body data-lang="de">
+
+<div class="accent-bar"></div>
+
+<!-- LANG SWITCHER -->
+<div class="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('de')">DE</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('gr')">ΕΛ</button>
+</div>
+
+<!-- HERO -->
+<div class="hero-wrap">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+
+  <div class="monogram-block">
+    <div class="monogram-compact">K <em>&</em> M</div>
+    <div class="monogram-full">Katerina &amp; Michael</div>
+    <div class="monogram-date">03 · VI · 2026</div>
+  </div>
+
+  <span class="gold-line" id="anchor-line"></span>
+
+  <div class="illustration-wrap" id="illustration-wrap">
+    <svg id="illustration-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"></svg>
+  </div>
+
+  <div class="event-block">
+    <div class="event-name">Greek Mezze</div>
+    <div class="event-sub">Koukoutsi</div>
+  </div>
+
+  <span class="gold-line"></span>
+</div>
+
+<!-- UHRZEIT -->
+<div class="section">
+  <span class="section-label L-de">Uhrzeit</span>
+  <span class="section-label L-en">Time</span>
+  <span class="section-label L-gr">Ώρα</span>
+  <div class="content-text">21:00</div>
+</div>
+
+<span class="faint-line"></span>
+
+<!-- LOCATION -->
+<div class="section">
+  <span class="section-label L-de">Location</span>
+  <span class="section-label L-en">Location</span>
+  <span class="section-label L-gr">Τοποθεσία</span>
+  <a class="location-link" href="https://maps.app.goo.gl/z91TzSdV4kYzSUaR6" target="_blank" rel="noopener">
+    <span class="location-pin">📍</span>
+    <span class="location-text">
+      <span class="location-name">Koukoutsi</span>
+      <span class="location-sub L-de">In Google Maps öffnen</span>
+      <span class="location-sub L-en">Open in Google Maps</span>
+      <span class="location-sub L-gr">Άνοιγμα στους Χάρτες Google</span>
+    </span>
+    <span class="location-arrow">→</span>
+  </a>
+</div>
+
+<span class="faint-line"></span>
+
+<!-- MENU -->
+<div class="section">
+  <span class="section-label L-de">Menu</span>
+  <span class="section-label L-en">Menu</span>
+  <span class="section-label L-gr">Μενού</span>
+
+  <div class="menu-cols">
+    <div class="menu-col menu-col-left">
+      <span class="menu-col-label L-de">Drinks</span>
+      <span class="menu-col-label L-en">Drinks</span>
+      <span class="menu-col-label L-gr">Ποτά</span>
+      <ul class="included-list">
+        <li><div class="includes-dot"></div>
+          <div class="included-text">
+            <span class="L-de">Wein (Rosé / Weiß / Rot)</span>
+            <span class="L-en">Wine (Rosé / White / Red)</span>
+            <span class="L-gr">Κρασί (Ροζέ / Λευκό / Κόκκινο)</span>
+          </div>
+        </li>
+        <li><div class="includes-dot"></div><div class="included-text">Beer</div></li>
+        <li><div class="includes-dot"></div>
+          <div class="included-text">
+            <span class="L-de">Softdrinks</span>
+            <span class="L-en">Soft drinks</span>
+            <span class="L-gr">Αναψυκτικά</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-divider"></div>
+    <div class="menu-col menu-col-right">
+      <span class="menu-col-label L-de">Food</span>
+      <span class="menu-col-label L-en">Food</span>
+      <span class="menu-col-label L-gr">Φαγητό</span>
+      <ul class="included-list">
+        <li><div class="includes-dot"></div>
+          <div class="included-text">
+            <span class="L-de">Greek Mezze</span>
+            <span class="L-en">Greek Mezze</span>
+            <span class="L-gr">Ελληνικοί Μεζέδες</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- WINE ACCORDION -->
+  <div class="wine-list" id="wine-list"></div>
+</div>
+
+<span class="faint-line"></span>
+
+<!-- KLEINDRUCK -->
+<div class="section" style="padding-top:10px; padding-bottom:10px;">
+  <div class="kleindruck L-de">Weitere Getränke und Essen auf eigene Rechnung</div>
+  <div class="kleindruck L-en">Additional drinks and food at own expense</div>
+  <div class="kleindruck L-gr">Επιπλέον ποτά και φαγητό με ιδία χρέωση</div>
+</div>
+
+<span class="faint-line"></span>
+
+<!-- HINWEISE -->
+<div class="section">
+  <span class="section-label L-de">Hinweise</span>
+  <span class="section-label L-en">Notes</span>
+  <span class="section-label L-gr">Σημειώσεις</span>
+
+  <div class="content-italic L-de">
+    Mezze bedeutet „kleine Köstlichkeiten" — viele Teller, wenig Entscheidungen, viel Freude.
+    Dazu live Bouzouki: Griechenlands Antwort auf die Gitarre, nur lauter und mit mehr Seele.
+  </div>
+  <div class="content-italic L-en">
+    Mezze means "small delights" — many dishes, few decisions, much joy.
+    Live Bouzouki included: Greece's answer to the guitar, only louder and with more soul.
+  </div>
+  <div class="content-italic L-gr">
+    Μεζές σημαίνει «μικρές απολαύσεις» — πολλά πιάτα, λίγες αποφάσεις, πολλή χαρά.
+    Ζωντανό μπουζούκι: η ελληνική απάντηση στην κιθάρα, απλώς πιο δυνατή και με περισσότερη ψυχή.
+  </div>
+</div>
+
+<div class="bottom-corners">
+  <div class="corner-bl-abs"></div>
+  <div class="corner-br-abs"></div>
+</div>
+
+<script>
+// ── LANGUAGE ──────────────────────────────────────────────────────
+function setLang(lang) {
+  document.body.setAttribute('data-lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.lang-btn[onclick="setLang(\'' + lang + '\')"]').classList.add('active');
+  renderWines(lang);
+}
+
+// ── WINE DATA ─────────────────────────────────────────────────────
+const wines = [
+  {
+    dot: '#E8C4C4',
+    name: { de: 'Rosé · Rosé de Xinomavro', en: 'Rosé · Rosé de Xinomavro', gr: 'Ροζέ · Rosé de Xinomavro' },
+    producer: { de: 'Thymiopoulos · Naoussa, Makedonien · 2023', en: 'Thymiopoulos · Naoussa, Macedonia · 2023', gr: 'Thymiopoulos · Νάουσα, Μακεδονία · 2023' },
+    desc: {
+      de: 'Ein trockener Roséwein aus der Xinomavro-Traube — „sauer-schwarz" auf Griechisch. Lachsrosa mit intensiven Aromen von Aprikose, blutroter Orange und Wilderdbeere. Am Gaumen frisch und rund mit feiner Struktur — perfekt zu Mezze.',
+      en: 'A dry rosé from the Xinomavro grape — "sour-black" in Greek. Salmon pink with intense aromas of apricot, blood orange and wild strawberry. Fresh and round on the palate — perfect with mezze.',
+      gr: 'Ένα ξηρό ροζέ από την ποικιλία Ξινόμαυρο. Σολομός-ροζ χρώμα με έντονα αρώματα βερίκοκου, αιματόχαπτης πορτοκαλιάς και άγριας φράουλας. Δροσερό και στρογγυλό στον ουρανίσκο — τέλειο με μεζέδες.'
+    }
+  },
+  {
+    dot: '#F5EAC8',
+    name: { de: 'Weiß · Malagousia', en: 'White · Malagousia', gr: 'Λευκό · Μαλαγουζιά' },
+    producer: { de: 'Ktima Gerovassiliou · Epanomi, Makedonien · 2023', en: 'Ktima Gerovassiliou · Epanomi, Macedonia · 2023', gr: 'Κτήμα Γεροβασιλείου · Επανομή, Μακεδονία · 2023' },
+    desc: {
+      de: 'Die Malagousia-Traube war in den 1970ern fast ausgestorben — heute Griechenlands aromatischster Weißwein. Zitronengrün mit Aromen von Pfirsich, Jasmin und frischen Kräutern. Vollmundig, frisch, mit mineralischem Abgang.',
+      en: 'Nearly extinct in the 1970s — today Greece\'s most aromatic white. Lemon green with aromas of peach, jasmine and fresh herbs. Full-bodied, fresh, with a long mineral finish.',
+      gr: 'Σχεδόν εξαφανισμένη στη δεκαετία του \'70 — σήμερα το πιο αρωματικό λευκό της Ελλάδας. Λεμονοπράσινο με αρώματα ροδάκινου, γιασεμιού και φρέσκων βοτάνων. Πλούσιο και δροσερό, με μακρά μεταλλική επίγευση.'
+    }
+  },
+  {
+    dot: '#C4A8C4',
+    name: { de: 'Rot · Xinomavro', en: 'Red · Xinomavro', gr: 'Κόκκινο · Ξινόμαυρο' },
+    producer: { de: 'Kir-Yianni · Naoussa, Makedonien · 2022', en: 'Kir-Yianni · Naoussa, Macedonia · 2022', gr: 'Κυρ-Γιάννης · Νάουσα, Μακεδονία · 2022' },
+    desc: {
+      de: 'Xinomavro — „sauer-schwarz" — gilt als das griechische Barolo: hohe Säure, feste Tannine, langer Abgang. Intensive Aromen von Wildkirsche, getrockneter Tomate und feinen Kräutern. Elegant und ausgewogen.',
+      en: 'Xinomavro — Greece\'s answer to Barolo. High acidity, firm tannins, and a long finish. Intense aromas of wild cherry, dried tomato and fine herbs. Elegant and perfectly balanced.',
+      gr: 'Το Ξινόμαυρο — το ελληνικό Barolo. Υψηλή οξύτητα, σταθερές τανίνες, μακρά επίγευση. Έντονα αρώματα αγριοκέρασου, αποξηραμένης ντομάτας και λεπτών βοτάνων. Κομψό και ισορροπημένο.'
+    }
+  }
+];
+
+function renderWines(lang) {
+  const list = document.getElementById('wine-list');
+  const openSet = new Set();
+  list.querySelectorAll('.wine-item.open').forEach(el => openSet.add(el.dataset.i));
+  list.innerHTML = '';
+  wines.forEach((w, i) => {
+    const item = document.createElement('div');
+    item.className = 'wine-item' + (openSet.has(String(i)) ? ' open' : '');
+    item.dataset.i = i;
+    item.innerHTML =
+      '<div class="wine-header" onclick="this.parentElement.classList.toggle(\'open\')">' +
+        '<div class="wine-dot" style="background:' + w.dot + '"></div>' +
+        '<div class="wine-name">' + w.name[lang] + '</div>' +
+        '<span class="wine-chevron">▾</span>' +
+      '</div>' +
+      '<div class="wine-body">' +
+        '<div class="wine-producer">' + w.producer[lang] + '</div>' +
+        '<div class="wine-desc">' + w.desc[lang] + '</div>' +
+      '</div>';
+    list.appendChild(item);
+  });
+}
+
+// ── ILLUSTRATION ──────────────────────────────────────────────────
+document.fonts.ready.then(() => requestAnimationFrame(() => requestAnimationFrame(() => {
+  const heroWrap = document.querySelector('.hero-wrap');
+  const anchorLine = document.getElementById('anchor-line');
+  const secondGoldLine = anchorLine.nextElementSibling.nextElementSibling.nextElementSibling;
+  const wrap = document.getElementById('illustration-wrap');
+  const svg = document.getElementById('illustration-svg');
+
+  const heroRect = heroWrap.getBoundingClientRect();
+  const anchorRect = anchorLine.getBoundingClientRect();
+  const secondLineRect = secondGoldLine.getBoundingClientRect();
+
+  const svgTop = anchorRect.bottom - heroRect.top;
+  const svgBottom = secondLineRect.bottom - heroRect.top;
+  const svgH = svgBottom - svgTop;
+  const svgW = wrap.offsetWidth;
+
+  wrap.style.top = svgTop + 'px';
+  wrap.style.height = svgH + 'px';
+  svg.setAttribute('viewBox', '0 0 ' + svgW + ' ' + svgH);
+  svg.setAttribute('width', svgW);
+  svg.setAttribute('height', svgH);
+
+  const accent = '#1B2D50';
+  const goldY = svgH;
+
+  // ── OLIVE BRANCH left ────────────────────────────────────────────
+  const stemX = 20, stemY = goldY;
+  const stemPath = 'M'+stemX+','+stemY+' C'+(stemX+10)+','+(stemY-20)+' '+(stemX+22)+','+(stemY-32)+' '+(stemX+30)+','+(stemY-50)+' C'+(stemX+36)+','+(stemY-62)+' '+(stemX+28)+','+(stemY-74)+' '+(stemX+34)+','+(stemY-82);
+  const leafDefs = [
+    [stemX+12,stemY-22,1,18],[stemX+10,stemY-26,-1,16],
+    [stemX+20,stemY-38,1,18],[stemX+18,stemY-42,-1,15],
+    [stemX+26,stemY-54,1,16],[stemX+24,stemY-58,-1,14],
+    [stemX+30,stemY-68,1,14],[stemX+29,stemY-72,-1,12],
+  ];
+  const leaves = leafDefs.map(([ax,ay,dir,len]) => {
+    const ex = Math.max(0, ax + dir*len*0.8);
+    const ey = Math.max(2, ay - len*0.5);
+    return 'M'+ax+','+ay+' Q'+(ax+dir*len*0.5)+','+(ay-len*0.3)+' '+ex+','+ey;
+  });
+  const olives = [[stemX+16,stemY-30],[stemX+24,stemY-46],[stemX+31,stemY-62]];
+
+  // ── BOUZOUKI right ───────────────────────────────────────────────
+  const bx = svgW - 52, by = goldY;
+  const bodyW = 26, bodyH = 36;
+  const bodyPath = 'M'+bx+','+by+' C'+(bx-bodyW)+','+(by-10)+' '+(bx-bodyW)+','+(by-bodyH+8)+' '+bx+','+(by-bodyH)+' C'+(bx+bodyW)+','+(by-bodyH+8)+' '+(bx+bodyW)+','+(by-10)+' '+bx+','+by+' Z';
+  const neckTopX = bx+2, neckTopY = by-bodyH-52;
+  const hsY = Math.max(2, neckTopY-10);
+  const neckPath = 'M'+(bx-5)+','+(by-bodyH+2)+' L'+(neckTopX-4)+','+(neckTopY+4)+' L'+(neckTopX+4)+','+(neckTopY+4)+' L'+(bx+5)+','+(by-bodyH+2)+' Z';
+  const headPath = 'M'+(neckTopX-7)+','+neckTopY+' L'+(neckTopX+7)+','+neckTopY+' L'+(neckTopX+6)+','+hsY+' L'+(neckTopX-6)+','+hsY+' Z';
+  const pegs = [
+    'M'+(neckTopX-7)+','+(hsY+3)+' L'+Math.max(0,neckTopX-13)+','+(hsY+2),
+    'M'+(neckTopX-7)+','+(hsY+6)+' L'+Math.max(0,neckTopX-13)+','+(hsY+5),
+    'M'+(neckTopX+7)+','+(hsY+3)+' L'+Math.min(svgW,neckTopX+13)+','+(hsY+2),
+    'M'+(neckTopX+7)+','+(hsY+6)+' L'+Math.min(svgW,neckTopX+13)+','+(hsY+5),
+  ];
+  const strings = [0,1,2,3].map(i => 'M'+(neckTopX-3+i*2)+','+hsY+' L'+(bx-6+i*4)+','+by);
+
+  svg.innerHTML =
+    '<g stroke="'+accent+'" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="'+stemPath+'" stroke-width="1.5"/>' +
+      leaves.map(l => '<path d="'+l+'" stroke-width="1.2"/>').join('') +
+      olives.map(([ox,oy]) => '<circle cx="'+ox+'" cy="'+oy+'" r="2.5" fill="'+accent+'" stroke="none"/>').join('') +
+    '</g>' +
+    '<g stroke="'+accent+'" fill="none" stroke-linecap="round">' +
+      '<path d="'+bodyPath+'" stroke-width="1.5"/>' +
+      '<circle cx="'+bx+'" cy="'+(by-bodyH*0.45)+'" r="5" stroke-width="1"/>' +
+      '<path d="'+neckPath+'" stroke-width="1" fill="'+accent+'" fill-opacity="0.15"/>' +
+      '<path d="'+headPath+'" stroke-width="1.2"/>' +
+      pegs.map(p => '<path d="'+p+'" stroke-width="1.5"/>').join('') +
+      strings.map(s => '<path d="'+s+'" stroke-width="0.7" opacity="0.7"/>').join('') +
+    '</g>';
+})));
+
+// ── INIT ──────────────────────────────────────────────────────────
+renderWines('de');
+</script>
+</body>
+</html>
