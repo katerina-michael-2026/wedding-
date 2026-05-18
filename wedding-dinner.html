@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F9F7F4">
+<title>Wedding Dinner · K & M</title>
+
+<!-- Open Graph / WhatsApp Preview -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://katerina-michael-2026.github.io/wedding-/wedding-dinner.html">
+<meta property="og:title" content="Wedding Dinner · Katerina & Michael">
+<meta property="og:description" content="Fr, 05. Juni 2026 · 16:30 Uhr · Das Hochzeitsabendessen — ein besonderer Abend an einem noch geheimen Ort.">
+<meta property="og:image" content="https://katerina-michael-2026.github.io/wedding-/preview-wedding-dinner.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wedding Dinner · Katerina & Michael">
+<meta name="twitter:description" content="Fr, 05. Juni 2026 · 16:30 Uhr · Das Hochzeitsabendessen.">
+<meta name="twitter:image" content="https://katerina-michael-2026.github.io/wedding-/preview-wedding-dinner.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Josefin+Sans:wght@300&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #B8975A;
+    --navy: #1A3A5C;
+    --teal: #5DCAA5;
+    --navy-light: #5C8BA8;
+    --cream: #F9F7F4;
+    --text: #2A3A4A;
+    --muted: #5C7A8A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    min-height: 100vh;
+    max-width: 430px;
+    margin: 0 auto;
+  }
+
+  /* ── LANGUAGE SYSTEM ── */
+  .L-de, .L-en, .L-gr { display: none !important; }
+  body[data-lang=de] .L-de { display: block !important; }
+  body[data-lang=en] .L-en { display: block !important; }
+  body[data-lang=gr] .L-gr { display: block !important; }
+  body[data-lang=de] .L-de.inline { display: inline !important; }
+  body[data-lang=en] .L-en.inline { display: inline !important; }
+  body[data-lang=gr] .L-gr.inline { display: inline !important; }
+
+  /* ── LANG SWITCHER ── */
+  .lang-switcher {
+    display: flex; justify-content: center; gap: 6px;
+    padding: 16px 28px 0;
+  }
+  .lang-btn {
+    font-family: 'Josefin Sans', sans-serif; font-size: 9px;
+    letter-spacing: 0.15em; color: var(--navy-light);
+    border: 0.5px solid rgba(92,139,168,0.3); border-radius: 40px;
+    padding: 4px 12px; background: transparent; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .lang-btn.active { background: var(--navy); color: var(--cream); border-color: var(--navy); }
+
+  /* ── ACCENT BAR ── */
+  .accent-bar {
+    height: 3px;
+    background: var(--gold);
+    width: 100%;
+  }
+
+  /* ── CORNER ORNAMENTS ── */
+  .hero-wrap {
+    position: relative;
+    padding: 0 14px;
+  }
+  .corner {
+    position: absolute;
+    width: 20px; height: 20px;
+    opacity: 0.65; z-index: 2;
+  }
+  .corner-tl { top: 14px; left: 14px; border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+  .corner-tr { top: 14px; right: 14px; border-top: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+
+  /* ── MONOGRAM BLOCK ── */
+  .monogram-block {
+    text-align: center;
+    padding-top: 26px; padding-bottom: 10px;
+    position: relative; z-index: 1;
+  }
+  .monogram-compact {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-weight: 300; letter-spacing: 0.08em; color: var(--gold);
+  }
+  .monogram-compact em { font-style: italic; }
+  .monogram-full {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-weight: 300; letter-spacing: 0.08em; color: var(--navy); margin-top: 2px;
+  }
+  .monogram-date {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 7.5px; font-weight: 300; letter-spacing: 0.22em;
+    color: var(--gold); margin-top: 4px; text-transform: uppercase;
+  }
+
+  /* ── GOLD LINES ── */
+  .gold-line {
+    display: block; width: 100%; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
+    position: relative; z-index: 1;
+  }
+
+  /* ── EVENT BLOCK ── */
+  .event-block {
+    text-align: center; padding: 6px 24px 6px;
+    position: relative; z-index: 1;
+  }
+  .illus-frame {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    position: relative;
+  }
+  .illus-branch { flex-shrink: 0; opacity: 0.30; }
+  .illus-branch-r { transform: scaleX(-1); }
+  .event-name-wrap {
+    position: relative; display: flex; align-items: center; justify-content: center;
+  }
+  .illus-shell-bg {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -62%);
+    opacity: 0.13; pointer-events: none; z-index: 0;
+  }
+  .event-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px; font-weight: 300; font-style: italic;
+    color: var(--navy); line-height: 1.15;
+    position: relative; z-index: 1;
+  }
+
+  /* ── CONTENT SECTIONS ── */
+  .section { padding: 14px 24px; position: relative; }
+  .section-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 7px; font-weight: 300; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+  }
+  .content-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-weight: 400; color: var(--text); line-height: 1.65;
+  }
+  .content-italic {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px; font-weight: 300; font-style: italic;
+    color: var(--muted); line-height: 1.65;
+  }
+  .faint-line {
+    display: block; width: calc(100% - 48px); margin: 0 24px;
+    height: 1px; background: rgba(184,151,90,0.18);
+  }
+
+  /* ── LOCATION LINK ── */
+  .location-link {
+    display: flex; align-items: center; gap: 8px;
+    text-decoration: none; color: var(--navy);
+    padding: 8px 10px; border: 0.5px solid rgba(184,151,90,0.35);
+    border-radius: 6px; background: rgba(26,58,92,0.03); transition: background 0.15s;
+  }
+  .location-link:hover { background: rgba(26,58,92,0.06); }
+  .location-pin { font-size: 13px; flex-shrink: 0; }
+  .location-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-weight: 400; color: var(--navy);
+  }
+  .location-arrow {
+    margin-left: auto; font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px; color: var(--gold); opacity: 0.8;
+  }
+
+  /* ── ATTIRE BADGE ── */
+  .attire-badge {
+    display: inline-block;
+    font-family: 'Josefin Sans', sans-serif; font-size: 7px; font-weight: 300;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--navy);
+    border: 0.5px solid rgba(184,151,90,0.5); border-radius: 40px; padding: 5px 18px;
+  }
+
+  /* ── CORNER BOTTOM ── */
+  .bottom-corners { position: relative; height: 14px; margin: 0 14px; }
+  .corner-bl-abs {
+    position: absolute; bottom: 0; left: 0; width: 20px; height: 20px;
+    border-bottom: 1px solid var(--gold); border-left: 1px solid var(--gold); opacity: 0.65;
+  }
+  .corner-br-abs {
+    position: absolute; bottom: 0; right: 0; width: 20px; height: 20px;
+    border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); opacity: 0.65;
+  }
+</style>
+</head>
+<body data-lang="de">
+
+<div class="accent-bar"></div>
+
+<!-- LANG SWITCHER -->
+<div class="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('de')">DE</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('gr')">ΕΛ</button>
+</div>
+
+<div class="hero-wrap">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+
+  <div class="monogram-block">
+    <div class="monogram-compact">K <em>&</em> M</div>
+    <div class="monogram-full">Katerina &amp; Michael</div>
+    <div class="monogram-date">05 · VI · 2026</div>
+  </div>
+
+
+  <span class="gold-line"></span>
+
+  <div class="event-block">
+    <div class="illus-frame">
+      <!-- Linker Olivenzweig: schmalere, längere Blätter mit Mittelrippe -->
+      <svg class="illus-branch" width="52" height="76" viewBox="0 0 52 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Hauptstamm: geschwungen von unten nach oben-links -->
+        <path d="M28 74 Q26 58 22 44 Q18 30 12 18 Q8 10 5 3" stroke="#1A3A5C" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <!-- Blatt 1 (oben) -->
+        <path d="M12 18 Q4 14 2 8 Q8 10 12 18Z" fill="#1A3A5C"/>
+        <path d="M12 18 Q7 12 2 8" stroke="#F9F7F4" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <!-- Blatt 2 (links) -->
+        <path d="M16 26 Q5 22 2 15 Q9 18 16 26Z" fill="#1A3A5C"/>
+        <path d="M16 26 Q9 20 2 15" stroke="#F9F7F4" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <!-- Blatt 3 (rechts) -->
+        <path d="M20 32 Q30 26 34 19 Q28 24 20 32Z" fill="#1A3A5C"/>
+        <path d="M20 32 Q27 25 34 19" stroke="#F9F7F4" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <!-- Blatt 4 (links) -->
+        <path d="M18 42 Q6 38 3 30 Q11 34 18 42Z" fill="#1A3A5C"/>
+        <path d="M18 42 Q9 36 3 30" stroke="#F9F7F4" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <!-- Blatt 5 (rechts) -->
+        <path d="M22 48 Q33 42 36 34 Q29 40 22 48Z" fill="#1A3A5C"/>
+        <path d="M22 48 Q30 41 36 34" stroke="#F9F7F4" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <!-- Blatt 6 (links) -->
+        <path d="M22 58 Q10 55 8 47 Q15 51 22 58Z" fill="#1A3A5C"/>
+        <path d="M22 58 Q14 53 8 47" stroke="#F9F7F4" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <!-- Blatt 7 (rechts) -->
+        <path d="M25 64 Q36 59 38 52 Q31 57 25 64Z" fill="#1A3A5C"/>
+        <path d="M25 64 Q32 58 38 52" stroke="#F9F7F4" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <!-- Oliven -->
+        <circle cx="6" cy="10" r="2.8" fill="#1A3A5C" opacity="0.55"/>
+        <circle cx="8" cy="36" r="2.4" fill="#1A3A5C" opacity="0.55"/>
+        <circle cx="28" cy="54" r="2.2" fill="#1A3A5C" opacity="0.55"/>
+      </svg>
+
+      <!-- Event-Name mit Muschel dahinter -->
+      <div class="event-name-wrap">
+        <!-- Muschel als Hintergrundbild hinter dem Text -->
+        <svg class="illus-shell-bg" width="88" height="72" viewBox="0 0 64 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M32 50 C12 50 2 36 2 24 C2 10 14 2 32 2 C50 2 62 10 62 24 C62 36 52 50 32 50 Z" fill="#1A3A5C"/>
+          <path d="M32 50 Q18 32 12 6"  stroke="#F9F7F4" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M32 50 Q23 30 20 4"  stroke="#F9F7F4" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M32 50 Q30 28 32 2"  stroke="#F9F7F4" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M32 50 Q40 30 44 4"  stroke="#F9F7F4" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M32 50 Q46 32 52 6"  stroke="#F9F7F4" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M32 50 Q14 34 6 12"  stroke="#F9F7F4" stroke-width="0.7" fill="none" opacity="0.35"/>
+          <path d="M32 50 Q50 34 58 12" stroke="#F9F7F4" stroke-width="0.7" fill="none" opacity="0.35"/>
+          <ellipse cx="32" cy="49" rx="20" ry="3.5" fill="#1A3A5C"/>
+        </svg>
+        <div class="event-name">Wedding Dinner</div>
+      </div>
+
+      <!-- Rechter Olivenzweig (gespiegelt) -->
+      <svg class="illus-branch illus-branch-r" width="52" height="76" viewBox="0 0 52 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 74 Q26 58 22 44 Q18 30 12 18 Q8 10 5 3" stroke="#1A3A5C" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <path d="M12 18 Q4 14 2 8 Q8 10 12 18Z" fill="#1A3A5C"/>
+        <path d="M12 18 Q7 12 2 8" stroke="#F9F7F4" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <path d="M16 26 Q5 22 2 15 Q9 18 16 26Z" fill="#1A3A5C"/>
+        <path d="M16 26 Q9 20 2 15" stroke="#F9F7F4" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <path d="M20 32 Q30 26 34 19 Q28 24 20 32Z" fill="#1A3A5C"/>
+        <path d="M20 32 Q27 25 34 19" stroke="#F9F7F4" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <path d="M18 42 Q6 38 3 30 Q11 34 18 42Z" fill="#1A3A5C"/>
+        <path d="M18 42 Q9 36 3 30" stroke="#F9F7F4" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <path d="M22 48 Q33 42 36 34 Q29 40 22 48Z" fill="#1A3A5C"/>
+        <path d="M22 48 Q30 41 36 34" stroke="#F9F7F4" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <path d="M22 58 Q10 55 8 47 Q15 51 22 58Z" fill="#1A3A5C"/>
+        <path d="M22 58 Q14 53 8 47" stroke="#F9F7F4" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <path d="M25 64 Q36 59 38 52 Q31 57 25 64Z" fill="#1A3A5C"/>
+        <path d="M25 64 Q32 58 38 52" stroke="#F9F7F4" stroke-width="0.5" fill="none" opacity="0.5"/>
+        <circle cx="6" cy="10" r="2.8" fill="#1A3A5C" opacity="0.55"/>
+        <circle cx="8" cy="36" r="2.4" fill="#1A3A5C" opacity="0.55"/>
+        <circle cx="28" cy="54" r="2.2" fill="#1A3A5C" opacity="0.55"/>
+      </svg>
+    </div>
+  </div>
+
+  <span class="gold-line"></span>
+</div>
+
+<!-- UHRZEIT -->
+<div class="section" style="text-align:center; padding-top:14px;">
+  <div class="section-label" style="text-align:center;">Uhrzeit / Time / Ώρα</div>
+  <div class="content-text" style="text-align:center;">16:30</div>
+</div>
+
+<span class="faint-line"></span>
+
+<!-- TREFFPUNKT SHUTTLE -->
+<div class="section">
+  <div class="section-label L-de" style="text-align:center;">Treffpunkt Shuttle</div>
+  <div class="section-label L-en" style="text-align:center;">Shuttle Meeting Point</div>
+  <div class="section-label L-gr" style="text-align:center;">Σημείο Συνάντησης Shuttle</div>
+  <a class="location-link" href="https://maps.app.goo.gl/rGVTPc1XeKMeSDJ46" target="_blank" rel="noopener">
+    <span class="location-pin">📍</span>
+    <span class="location-name L-de">In Google Maps öffnen</span>
+    <span class="location-name L-en">Open in Google Maps</span>
+    <span class="location-name L-gr">Άνοιγμα στο Google Maps</span>
+    <span class="location-arrow">→</span>
+  </a>
+</div>
+
+<span class="faint-line"></span>
+
+<!-- HINWEISE -->
+<div class="section" style="text-align:center;">
+  <div class="section-label">Hinweise / Notes / Σημειώσεις</div>
+  <div class="content-italic L-de">
+    Der genaue Veranstaltungsort bleibt eine Überraschung — der Shuttle-Treffpunkt ist oben angegeben.<br><br>
+    Die Location liegt am Meer, auf Betonboden — Absätze sind also kein Problem.<br><br>
+    Wir empfehlen eine Jacke, Pashmina oder ein Tuch für die kühlen Abendstunden.
+  </div>
+  <div class="content-italic L-en">
+    The venue remains a surprise — the shuttle meeting point is indicated above.<br><br>
+    The venue is right by the sea, on a concrete floor — stilettos are absolutely fine.<br><br>
+    We recommend bringing a jacket, pashmina, or wrap for the cooler evening hours.
+  </div>
+  <div class="content-italic L-gr">
+    Ο χώρος παραμένει έκπληξη — το σημείο shuttle αναφέρεται παραπάνω.<br><br>
+    Αν και δίπλα στη θάλασσα, ο χώρος έχει τσιμεντένιο δάπεδο — ψηλοτάκουνα είναι εντάξει.<br><br>
+    Συνιστούμε σακάκι, pashmina ή κάλυμμα για τις δροσερές ώρες της νύχτας.
+  </div>
+</div>
+
+<span class="faint-line"></span>
+
+<!-- DRESSCODE -->
+<div class="section" style="text-align:center;">
+  <div class="section-label L-de">Dresscode</div>
+  <div class="section-label L-en">Dress Code</div>
+  <div class="section-label L-gr">Ενδυματολογικός Κώδικας</div>
+  <span class="attire-badge">Cocktail Attire</span>
+</div>
+
+<!-- BOTTOM CORNERS -->
+<div class="bottom-corners">
+  <div class="corner-bl-abs"></div>
+  <div class="corner-br-abs"></div>
+</div>
+
+<script>
+function setLang(lang) {
+  document.body.setAttribute('data-lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.lang-btn[onclick="setLang(\'' + lang + '\')"]').classList.add('active');
+}
+</script>
+</body>
+</html>
